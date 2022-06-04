@@ -2,16 +2,18 @@ package dc.pocket.test.domain
 
 final case class User(
                        firstName:String,
+                       secondName: String,
                        lastName:String,
                        birthDate:Int,
                        phoneNumber:String,
                        identificationNumber:String,
+                       identificationType: String,
                        address:String,
                        city:String,
                        department:String,
-                       userConfig:UserConfig,
                        email:String,
-                       credentials: String
+                       user: String,
+                       password: String
                      )
 
 case class UserConfig(billPreferences:String, rechargePreferences:String, friendAccounts:String)

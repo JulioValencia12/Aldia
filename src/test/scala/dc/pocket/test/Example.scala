@@ -24,5 +24,5 @@ class Example  extends Simulation with UserAPI with Environment {
 
   setUp(
     scn.inject(atOnceUsers(1))
-  ).protocols(httpProtocol)
+  ).protocols(httpProtocol.disableWarmUp)
 }

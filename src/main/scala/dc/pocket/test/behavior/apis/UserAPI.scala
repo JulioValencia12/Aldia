@@ -1,9 +1,14 @@
 package dc.pocket.test.behavior.apis
 
+import dc.pocket.test.domain.User
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.gatling.http.check.HttpCheck
 import io.gatling.http.request.builder.HttpRequestBuilder
+import io.circe._
+import io.circe.generic.auto._
+import io.circe.parser._
+import io.circe.syntax._
 
 trait UserAPI {
   type UserID = String
@@ -11,6 +16,7 @@ trait UserAPI {
   val path = "/v1/user"
 
   val userByIdResponseKey  = "GET_USER_BY_ID_RESPONSE"
+
   val userByIdResponseFirstNameKey            = "GET_USER_BY_ID_RESPONSE_FIRST_NAME"
   val userByIdResponseLastNameKey             = "GET_USER_BY_ID_RESPONSE_LAST_NAME"
   val userByIdResponseBirthDateKey            = "GET_USER_BY_ID_RESPONSE_BIRT_DATE"
@@ -57,6 +63,12 @@ trait UserAPI {
     http("get_user_by_id")
       .get(path)
       .queryParam("userId", userId)
+      .check(checks: _*)
+
+  val createUser: (User, List[HttpCheck]) => HttpRequestBuilder = (user, checks) =>
+    http("create_user")
+      .post(s"$path/create")
+      .body(StringBody(user.asJson.noSpaces))
       .check(checks: _*)
 
 }

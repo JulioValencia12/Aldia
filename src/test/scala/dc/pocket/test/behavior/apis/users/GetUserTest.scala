@@ -14,5 +14,5 @@ class GetUserTest  extends Simulation with UserAPI with Environment {
 
   setUp(
     scenarioOk.inject( atOnceUsers(1) )
-  ).protocols(httpProtocol)
+  ).protocols(httpProtocol.disableWarmUp)
 }
