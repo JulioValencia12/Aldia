@@ -4,8 +4,7 @@ import dc.pocket.test.Environment
 import dc.pocket.test.behavior.apis.UserAPI
 import dc.pocket.test.domain.User
 import io.gatling.core.Predef._
-import io.gatling.http.Predef.status
-import io.gatling.http.check.HttpCheck
+import io.gatling.http.Predef._
 
 class CreateUserTest extends Simulation with UserAPI with Environment {
 
