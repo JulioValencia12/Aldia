@@ -26,7 +26,7 @@ class CreateUserTest extends Simulation with UserAPI with Environment {
     )
 
   val scenarioOk =
-    scenario("get_user_by_id_ok")
+    scenario("create_user_ok")
     .exec(
       createUser( user, List.empty )
         .check(status.is(200))
