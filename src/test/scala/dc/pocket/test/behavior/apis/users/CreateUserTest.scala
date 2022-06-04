@@ -1,7 +1,7 @@
 package dc.pocket.test.behavior.apis.users
 
 import dc.pocket.test.Environment
-import dc.pocket.test.behavior.apis.UserAPI
+import dc.pocket.test.apis.UserAPI
 import dc.pocket.test.domain.User
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._

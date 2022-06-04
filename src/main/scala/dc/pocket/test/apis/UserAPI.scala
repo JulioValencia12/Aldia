@@ -1,4 +1,4 @@
-package dc.pocket.test.behavior.apis
+package dc.pocket.test.apis
 
 import dc.pocket.test.domain.User
 import io.gatling.core.Predef._
@@ -21,7 +21,7 @@ trait UserAPI {
   val userByIdResponseLastNameKey             = "GET_USER_BY_ID_RESPONSE_LAST_NAME"
   val userByIdResponseBirthDateKey            = "GET_USER_BY_ID_RESPONSE_BIRT_DATE"
   val userByIdResponsePhoneNumberKey          = "GET_USER_BY_ID_RESPONSE_PHONE_NUMBER"
-  val userByIdResponseIdentificationNumberKey = "GET_USER_BY_ID_RESPONSE_IDENTIFICATION_NAMBER"
+  val userByIdResponseIdentificationNumberKey = "GET_USER_BY_ID_RESPONSE_IDENTIFICATION_NUMBER"
   val userByIdResponseAddressKey              = "GET_USER_BY_ID_RESPONSE_ADDRESS"
   val userByIdResponseCityKey                 = "GET_USER_BY_ID_RESPONSE_CITY"
   val userByIdResponseDepartmentKey           = "GET_USER_BY_ID_RESPONSE_DEPARTMENT"
@@ -70,5 +70,7 @@ trait UserAPI {
       .post(s"$path/create")
       .body(StringBody(user.asJson.noSpaces))
       .check(checks: _*)
+
+
 
 }

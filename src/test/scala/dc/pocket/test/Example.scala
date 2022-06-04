@@ -1,6 +1,6 @@
 package dc.pocket.test
 
-import dc.pocket.test.behavior.apis.UserAPI
+import dc.pocket.test.apis.UserAPI
 
 import scala.concurrent.duration._
 import io.gatling.core.Predef._
