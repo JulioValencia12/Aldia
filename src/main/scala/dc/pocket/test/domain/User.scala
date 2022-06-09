@@ -12,8 +12,12 @@ final case class User(
                        city:String,
                        department:String,
                        email:String,
-                       user: String,
-                       password: String
+                       credentials:Credentials
                      )
+
+ case class Credentials(
+                         user: String,
+                         password: String
+                       )
 
 case class UserConfig(billPreferences:String, rechargePreferences:String, friendAccounts:String)

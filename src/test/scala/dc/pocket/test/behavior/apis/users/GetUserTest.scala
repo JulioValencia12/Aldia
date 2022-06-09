@@ -12,13 +12,14 @@ class GetUserTest extends Simulation with UserAPI with Environment {
       getUserById( "988b6140-ddf5-11ec-bfb6-4984ba70d27f", dataChecks )
     )
 
-  val scenarioKo =
-    scenario("get_user_by_id_ko")
-      .exec(
-        getUserById( "988b6140-ddf5-11ec-4984ba70d27f", dataChecks )
-      )
+//  val scenarioKo =
+//    scenario("get_user_by_id_ko")
+//      .exec(
+//        getUserById( "988b6140-ddf5-11ec-0000-4984ba70d27f", dataChecks )
+//      )
 
   setUp(
-    scenarioOk.inject( atOnceUsers(1) )
+    scenarioOk.inject( atOnceUsers(1) ) ,
+     //scenarioKo.inject( atOnceUsers(1) )
   ).protocols(httpProtocol.disableWarmUp)
 }

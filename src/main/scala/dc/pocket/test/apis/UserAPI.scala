@@ -65,12 +65,13 @@ trait UserAPI {
       .queryParam("userId", userId)
       .check(checks: _*)
 
-  val createUser: (User, List[HttpCheck]) => HttpRequestBuilder = (user, checks) =>
+  val createUser: (User, List[HttpCheck]) => HttpRequestBuilder = (user, checks) => {
+    println(user.asJson.noSpaces)
     http("create_user")
       .post(s"$path/create")
       .body(StringBody(user.asJson.noSpaces))
       .check(checks: _*)
-
+  }
 
 
 }
