@@ -1,6 +1,6 @@
 package dc.pocket.test.apis
 
-import dc.pocket.test.domain.User
+import dc.pocket.test.domain.{Pocket, User}
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.gatling.http.check.HttpCheck
@@ -38,8 +38,13 @@ trait AccountsAPI {
   val dataChecksPocketById: List[HttpCheck] = List(
     status.is(session => 200),
     jsonPath("$.pockets[0]").exists,
-//    jsonPath("$.name").notNull,
-//    jsonPath("$.description").notNull,
+    jsonPath("$.pockets[1]").exists,
+    jsonPath("$.pockets[0].number").notNull,
+    jsonPath("$.pockets[1].number").notNull,
+    jsonPath("$.pockets[0].name").notNull,
+    jsonPath("$.pockets[1].name").notNull,
+    jsonPath("$.pockets[0].description").notNull,
+    jsonPath("$.pockets[1].description").notNull,
   )
 
   val dataChecksBalance: List[HttpCheck] = List(
@@ -57,8 +62,8 @@ trait AccountsAPI {
 
   val extractDataBalance: List[HttpCheck] = List(
     bodyString.saveAs(balanceByAccountResponseKey),
-    jsonPath("$.accountNumber").saveAs(balanceByAccountResponseBalanceKey),
-    jsonPath("$.accountNumber").saveAs(balanceByAccountResponseCurrencyKey)
+    jsonPath("$.balance").saveAs(balanceByAccountResponseBalanceKey),
+    jsonPath("$.currency").saveAs(balanceByAccountResponseCurrencyKey)
   )
 
 // ******************************* funciones *******************************
@@ -77,9 +82,16 @@ trait AccountsAPI {
 
   val getBalanceByAccount: (AccountNumber, List[HttpCheck]) => HttpRequestBuilder = (accountNumber, checks) =>
     http("get_balance_by_accountNumber")
-      .get(s"$path//balance/:accountNumber")
-      .queryParam("accountNumber", accountNumber)
+      .get(s"$path//balance/$accountNumber")
       .check(checks: _*)
+
+  val createPocket: (Pocket, List[HttpCheck]) => HttpRequestBuilder = (pocket, checks) => {
+    println(pocket.asJson.noSpaces)
+    http("create_pocket")
+      .post(s"$path/createPocket")
+      .body(StringBody(pocket.asJson.noSpaces))
+      .check(checks: _*)
+  }
 
 }
 
